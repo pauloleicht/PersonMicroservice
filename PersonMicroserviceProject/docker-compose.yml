@@ -1,0 +1,19 @@
+version: '3.4'
+services:
+  person-microservice:
+    image: pauloleicht/person-microservice
+    restart: always
+    build: ./PersonMicroserviceProject
+    working_dir: /PersonMicroserviceProject
+    environment:
+      TZ: America/Sao_Paulo
+      SPRING_BOOT_ENVIRONMENT: Production
+    volumes:
+      - ./PersonMicroserviceProject:/PersonMicroserviceProject
+      - ~/.m2:/root/.m2
+    ports:
+      - "8080:8080"
+    command: mvn clean spring-boot:run
+networks:
+  person-network:
+    driver: bridge
